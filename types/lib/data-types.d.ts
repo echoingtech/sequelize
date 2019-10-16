@@ -102,7 +102,7 @@ export interface CharDataType extends StringDataType {
 }
 
 export interface CharDataTypeOptions extends StringDataTypeOptions {}
-   
+
 export type TextLength = 'tiny' | 'medium' | 'long';
 
 /**
@@ -525,6 +525,28 @@ export interface EnumDataType<T extends string> extends AbstractDataType {
 export interface EnumDataTypeOptions<T extends string> {
   values: T[];
 }
+
+/**
+ * An set. `DataTypes.SET('value', 'another value')`.
+ */
+export const SET: SetDataTypeConstructor;
+
+interface SetDataTypeConstructor extends AbstractDataTypeConstructor {
+  new <T extends string>(...values: T[]): SetDataType<T>;
+  new <T extends string>(options: SetDataTypeOptions<T>): SetDataType<T>;
+  <T extends string>(...values: T[]): SetDataType<T>;
+  <T extends string>(options: SetDataTypeOptions<T>): SetDataType<T>;
+}
+
+export interface SetDataType<T extends string> extends AbstractDataType {
+  values: T[];
+  options: SetDataTypeOptions<T>;
+}
+
+export interface SetDataTypeOptions<T extends string> {
+  values: T[];
+}
+
 
 /**
  * An array of `type`, e.g. `DataTypes.ARRAY(DataTypes.DECIMAL)`. Only available in postgres.
